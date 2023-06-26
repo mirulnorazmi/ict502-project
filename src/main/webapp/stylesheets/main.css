@@ -1,0 +1,42 @@
+@charset "UTF-8";
+
+.navbar {
+	border-bottom: 2px solid #59A52B;
+}
+
+button.btn.btn-primary {
+	background-color: #59A52B !important;
+	border-color: #59A52B !important;
+}
+
+button.btn.btn-primary:hover {
+	background-color: #486d2b !important;
+	border-color: #59A52B !important;
+}
+
+.sidebar-dashboard {
+	position: fixed !important;
+	border-right: 1px solid #59A52B;
+	height: 100%;
+	padding: 85px 15px 0;
+}
+
+.nav-link {
+	font-family: 'Roboto', sans-serif;
+	font-weight: 700;
+	letter-spacing: 1px;
+}
+
+.nav-link:hover {
+	color: #59A52B !important;
+}
+
+.bi-bank::before, .bi-kanban::before, .bi-person-square::before,
+	.bi-columns-gap::before {
+	/*     content: "\f62e"; */
+	/* color: #59A52B; */
+	font-size: 23;
+}
+.main-section{
+	padding: 75px 25px 0 !important;
+}
