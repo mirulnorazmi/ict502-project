@@ -17,13 +17,30 @@
 
 	<jsp:body>
 	<div
-			class="d-flex flex-column justify-content-center align-items-center">
+			class="d-flex flex-column justify-content-center align-items-left">
                     <div
 				class="container text-left d-flex flex-row justify-content-between align-items-center">
-						<h4>Employee list</h4> 
-                        <a href="createemployee"
-					class="btn btn-success">Create Employee</a>
+					<h4>Employee list</h4> 
                     </div>
+                    
+                    <div class="input-group mb-3">
+ 					 <input type="text" class="form-control" placeholder="Enter Employee Name" aria-label="Recipient's username" aria-describedby="button-addon2">
+ 						 <button class="btn btn-outline-secondary" type="button" id="button-addon2">Search</button>
+					</div>
+					
+					<div class="alert alert-success" role="alert">
+  						Click on the row to update and delete the employee details
+					</div>
+                    
+                    <div class="form-check-inline form-switch">
+  						<input class="form-check-input" type="checkbox" role="switch"
+							id="flexSwitchCheckChecked" checked>
+  					<label class="form-check-label" for="flexSwitchCheckChecked">sort a-z</label>
+					</div>
+					<div class="form-check-inline form-switch">
+  						<input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault">
+  						<label class="form-check-label" for="flexSwitchCheckDefault">all employee</label>
+					</div>
 
                     <table class="table table-hover align-middle mt-4">
                         <thead>
