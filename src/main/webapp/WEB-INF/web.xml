@@ -89,4 +89,14 @@
     <servlet-name>CreateProject</servlet-name>
     <url-pattern>/CreateProject</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>UpdateProject</display-name>
+    <servlet-name>UpdateProject</servlet-name>
+    <servlet-class>controller.project.UpdateProject</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>UpdateProject</servlet-name>
+    <url-pattern>/UpdateProject</url-pattern>
+  </servlet-mapping>
 </web-app>

@@ -1,6 +1,7 @@
 package service;
 
 import java.sql.Connection;
+
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -18,6 +19,7 @@ public class ProjectService {
 	
     private static final String SELECT_ALL_PROJECTS = "select * from project";
     private static final String INSERT_PROJECT_SQL = "insert into project (projectname, projectdept, projectsalary) VALUES (?, ?, ?)";
+    private static final String SELECT_PROJECT_ID = "SELECT * FROM project WHERE projectid=?";
     
 	protected Connection getConnection() {
         Connection connection = null;
@@ -76,6 +78,33 @@ public class ProjectService {
             printSQLException(e);
         }
     }
+	
+	public Projects getOneProject(Projects projects) {
+		Projects proj = null;
+
+		try (Connection connection = getConnection();
+				PreparedStatement preparedStatement = connection.prepareStatement(SELECT_PROJECT_ID)) {
+			preparedStatement.setInt(1, projects.getId());
+
+			ResultSet rs = preparedStatement.executeQuery();
+
+			while (rs.next()) {
+
+				int project_id = rs.getInt("projectid");
+				String name = rs.getString("projectname");
+				String dept = rs.getString("projectdept");
+				int salary = rs.getInt("projectsalary");
+
+
+				proj = new Projects(project_id, name, dept, salary);
+			}
+
+		} catch (SQLException e) {
+			printSQLException(e);
+		}
+
+		return proj;
+	}
 	
 	private void printSQLException(SQLException ex) {
         for (Throwable e: ex) {

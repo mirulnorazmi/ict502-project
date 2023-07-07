@@ -56,7 +56,7 @@
                                         <c:out value="${proj.salary}" />
                                     </td>
                                     <td><a
-								href="employee/edit?id=<c:out value='${proj.id}' />"><i
+								href="edit-project?id=<c:out value='${proj.id}' />"><i
 									class="bi bi-pencil-square"></i> Edit</a> &nbsp;&nbsp;&nbsp;&nbsp; <a
 								href="delete?id=<c:out value='${proj.id}' />"><i
 									class="bi bi-trash"></i> Delete</a></td>
