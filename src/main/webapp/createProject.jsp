@@ -1,4 +1,3 @@
-
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
@@ -25,31 +24,51 @@
 		    <li class="breadcrumb-item active" aria-current="page">Create Project</li>
 		  </ol>
 		</nav> 
-		<div
-				class="d-flex flex-column justify-content-center align-items-center mt-4">
-			<h4>Create Project</h4> 
-			<form action="createproject" method="post">
-			  <div class="mb-3">
-			    <label class="form-label">Project Name</label>
-			    <input type="text" class="form-control" name="name"
-							aria-describedby="projectName">
-			  </div>
-			  <div class="mb-3">
-			    <label class="form-label">Department</label>
-			    <input type="text" class="form-control" name="department"
-							aria-describedby="projectDepartment">
-			  </div>
-			  <div class="mb-3">
-			    <label class="form-label">Salary</label>
-			    <input type="text" class="form-control" name="salary"
-							aria-describedby="projectSalary">
-			  </div>
-			  <div>
-			  	<button type="reset" class="btn btn-danger">Reset</button>
-			  	<button type="submit" class="btn btn-primary">Create</button>
-			  </div>
-			</form>
-		</div>
-	</div>
+		
+		<section class="vh-100">
+  <div class="container-fluid h-custom">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col-md-9 col-lg-6 col-xl-5">
+        <img src="img/create_logo.png"
+          class="img-fluid" alt="Sample image" width= 800px height= 800px>
+      </div>
+      <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
+        <form>
+          <!-- Email input -->
+          <div class="form-outline mb-4">
+            <input type="text" id="form3Example3" class="form-control form-control-lg"
+              placeholder="Enter project name " />
+            <label class="form-label" for="form3Example3">Project Name</label>
+          </div>
+
+          <!-- Password input -->
+          <div class="form-outline mb-3">
+            <input type="text" id="form3Example4" class="form-control form-control-lg"
+              placeholder="Enter department" />
+            <label class="form-label" for="form3Example4">Department</label>
+          </div>
+          
+          <div class="form-outline mb-3">
+            <input type="number" id="form3Example5" class="form-control form-control-lg"
+              placeholder="Enter Salary"/>
+              <label class="form-label" for="form3Example5">Salary</label>
+          </div>
+
+          <div class="d-flex justify-content-between align-items-center"> 
+          </div>
+
+          <div class="text-center text-lg-start mt-4 pt-2">
+            <button type="button" class="btn btn-primary btn-lg"
+              style="padding-left: 2.5rem; padding-right: 2.5rem;">Create</button>
+              
+            <button type="button" class="btn btn-primary btn-lg"
+              style="padding-left: 2.5rem; padding-right: 2.5rem;">Reset</button>
+          </div>  
+        </form>
+      </div>
+    </div>
+  </div>
+  
+</section>
     </jsp:body>
 </t:dashboard>
