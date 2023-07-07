@@ -10,6 +10,7 @@ import jakarta.servlet.http.HttpSession;
 import service.LoginService;
 
 import java.io.IOException;
+import java.sql.SQLException;
 
 import bean.Users;
 
@@ -70,7 +71,8 @@ public class SigninServlet extends HttpServlet {
 //				mapping to index	
 				response.sendRedirect(request.getContextPath());
 			}
-		} catch (ClassNotFoundException e) {
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}

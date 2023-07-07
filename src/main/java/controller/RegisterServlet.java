@@ -55,19 +55,19 @@ public class RegisterServlet extends HttpServlet {
 		System.out.println(user.getEmail());
 		System.out.println(user.getPassword());
 
-		try {
-			if (loginservice.validate(user)) {
-				HttpSession session = request.getSession();
-				session.setAttribute("email", email);
-				response.sendRedirect("dashboard.jsp");
-			} else {
+//		try {
+//			if (loginservice.validate(user)) {
 //				HttpSession session = request.getSession();
-				// session.setAttribute("user", username);
-//				response.sendRedirect("index.jsp");
-			}
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-		}
+//				session.setAttribute("email", email);
+//				response.sendRedirect("dashboard.jsp");
+//			} else {
+////				HttpSession session = request.getSession();
+//				// session.setAttribute("user", username);
+////				response.sendRedirect("index.jsp");
+//			}
+//		} catch (ClassNotFoundException e) {
+//			e.printStackTrace();
+//		}
 //		System.out.println("User email : " + user.getEmail());
 //		System.out.println("User password : " + user.getPassword());
 //		request.getRequestDispatcher("/dashboard.jsp").forward(request,response);
