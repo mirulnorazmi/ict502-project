@@ -1,0 +1,21 @@
+@charset "ISO-8859-1";
+.jumbotron.jumbotron-fluid{
+	background-image: url("https://media.istockphoto.com/id/1154327523/vector/concept-envelope-with-rejected-letter.jpg?s=612x612&w=0&k=20&c=OcBvn4N9fYfD2mhOpsyWKrpNerPZj2dRgBI3WlbR33Q=");
+	/* width: 1040px; */
+	min-height: 246px;
+	background-size: 350px 280px;
+	background-position-x: right;
+	background-position-y: bottom;
+	background-repeat: no-repeat;
+	border: 2px solid #f4f4f4;
+	border-radius: 20px;
+}
+.btn.btn-outline-primary {
+	background-color: #ffffff ;
+	border-color: #59A52B ;
+	color:black;
+}
+.btn.btn-outline-primary:hover{
+	background-color:#59A52B;
+	border-color: #59A52B;
+}
