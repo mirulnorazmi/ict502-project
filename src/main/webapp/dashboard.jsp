@@ -43,6 +43,8 @@ _donutChartConfig.addColumns(new SingleValueColumn("data1", 30), new SingleValue
 <head>
 <link rel="stylesheet" href="stylesheets/dashboard.css" />
 </head>
+
+
 <t:dashboard>
 	<jsp:attribute name="title">
       dashboard
@@ -59,62 +61,64 @@ _donutChartConfig.addColumns(new SingleValueColumn("data1", 30), new SingleValue
 					
 						<div class="form-floating">
 						
-						<p class="h3" style="font-size:20px; padding: 100px 0 0 100px;  color: grey; ">"Unlock Your Team's Earnings Potential with Ease!"</p>
+						<p class="h3"
+							style="font-size: 20px; padding: 100px 0 0 100px; color: grey;">"Unlock Your Team's Earnings Potential with Ease!"</p>
 						
 						</div>
 						
 						
 					
-				</div><br>
+				</div>
+				<br>
 					<div class="d-flex flex-row mt-2" style="width: 100%;">
 				<div class="col-8">
 					<h4 style="text-align: left;">Status</h4>
 					<div class="d-flex flex-wrap">
 						<div class="card col-5 mb-2" style="margin-right: 10px;">
 							<div
-								class="card-body d-flex flex-row justify-content-between align-items-center">
+									class="card-body d-flex flex-row justify-content-between align-items-center">
 								<div>
 									<h5 class="card-title">7</h5>
 									<p class="card-text">Part Time</p>
 								</div>
 								<div class="border-icon-status">
-									<i class="bi bi-people" style="font-size:30px;"></i>
+									<i class="bi bi-people" style="font-size: 30px;"></i>
 								</div>
 							</div>
 						</div>
 						<div class="card col-5 mb-2" style="margin-right: 10px;">
 							<div
-								class="card-body d-flex flex-row justify-content-between align-items-center">
+									class="card-body d-flex flex-row justify-content-between align-items-center">
 								<div>
 									<h5 class="card-title">7</h5>
 									<p class="card-text">Full Time</p>
 								</div>
 								<div class="border-icon-status">
-									<i class="bi bi-people" style="font-size:30px;"></i>
+									<i class="bi bi-people" style="font-size: 30px;"></i>
 								</div>
 							</div>
 						</div>
 						<div class="card col-5 mb-2" style="margin-right: 10px;">
 							<div
-								class="card-body d-flex flex-row justify-content-between align-items-center">
+									class="card-body d-flex flex-row justify-content-between align-items-center">
 								<div>
 									<h5 class="card-title">12</h5>
 									<p class="card-text">Total Projects</p>
 								</div>
 								<div class="border-icon-status">
-									<i class="bi bi-cast" style="font-size:30px;"></i>
+									<i class="bi bi-cast" style="font-size: 30px;"></i>
 								</div>
 							</div>
 						</div>
 							<div class="card col-5 mb-2" style="margin-right: 10px;">
 							<div
-								class="card-body d-flex flex-row justify-content-between align-items-center">
+									class="card-body d-flex flex-row justify-content-between align-items-center">
 								<div>
 									<h5 class="card-title">12</h5>
 									<p class="card-text">Total Payment</p>
 								</div>
 								<div class="border-icon-status">
-									<i class="bi bi-credit-card" style="font-size:30px;"></i>
+									<i class="bi bi-credit-card" style="font-size: 30px;"></i>
 								</div>
 							</div>
 						</div>
@@ -124,8 +128,8 @@ _donutChartConfig.addColumns(new SingleValueColumn("data1", 30), new SingleValue
 				<div class="col-4">
 					<h4 style="text-align: left;">Shortcut</h4>
 					<div
-						class="d-flex flex-column justify-content-left align-items-top"
-						style="width: 100%">
+							class="d-flex flex-column justify-content-left align-items-top"
+							style="width: 100%">
 						<button type="button" class="btn btn-outline-primary mb-3">
 							Create employees</button>
 						<button type="button" class="btn btn-outline-primary mb-3">

@@ -17,7 +17,7 @@ import bean.Users;
 /**
  * Servlet implementation class MainServlet
  */
-@WebServlet("/dashboard") 
+@WebServlet("/dashboard")
 public class MainServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private EmployeeService employeeService;
@@ -64,22 +64,6 @@ public class MainServlet extends HttpServlet {
 			throws SQLException, IOException, ServletException {
 
 		RequestDispatcher dispatcher = request.getRequestDispatcher("dashboard.jsp");
-		dispatcher.forward(request, response);
-	}
-
-	private void showEmployee(HttpServletRequest request, HttpServletResponse response)
-			throws SQLException, IOException, ServletException {
-		List<Users> listUser = employeeService.selectAllUsers();
-		request.setAttribute("listUser", listUser);
-		RequestDispatcher dispatcher = request.getRequestDispatcher("employee.jsp");
-		dispatcher.forward(request, response);
-	}
-
-	private void showLogin(HttpServletRequest request, HttpServletResponse response)
-			throws SQLException, IOException, ServletException {
-//		List<Users> listUser = employeeService.selectAllUsers();
-//		request.setAttribute("listUser", listUser);
-		RequestDispatcher dispatcher = request.getRequestDispatcher("index.jsp");
 		dispatcher.forward(request, response);
 	}
 
