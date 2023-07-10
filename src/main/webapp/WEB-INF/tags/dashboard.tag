@@ -39,7 +39,8 @@
 	<nav class="navbar fixed-top" id="pageheader"
 		style="background-color: #ffffff;">
 		<div class="container d-flex jutify-content-between">
-			<a class="navbar-brand" href="<%=request.getContextPath() + "/dashboard" %>"> <img
+			<a class="navbar-brand"
+				href="<%=request.getContextPath() + "/dashboard"%>"> <img
 				src="img/flakepms-logo.png" alt="Logo" width="150">
 			</a>
 			<div class="d-flex flex-row align-items-center">
@@ -63,20 +64,30 @@
 	<div id="body">
 		<div
 			class="sidebar-dashboard col-2 flex-column flex-nowrap overflow-auto">
-			<a href="<%=request.getContextPath() + "/dashboard" %>" class="nav-link active  mt-4" aria-current="page"><i
+			<a href="<%=request.getContextPath() + "/dashboard"%>"
+				class="nav-link active  mt-4" aria-current="page"><i
 				class="bi bi-columns-gap" style="margin: 0 15px 0 30px;"></i>
 				Dashboard </a> <br>
 			<!-- nav -->
-			<a href="<%=request.getContextPath() + "/employee" %>" class="nav-link active mt-3" aria-current="page"><i
+			<a href="<%=request.getContextPath() + "/employee"%>"
+				class="nav-link active mt-3" aria-current="page"><i
 				class="bi bi-person-square" style="margin: 0 15px 0 30px;"></i>
-				Employee </a> <br> 
+				Employee </a> <br>
 			<!-- nav -->
-			<a href="<%=request.getContextPath() + "/project" %>" class="nav-link active mt-3" aria-current="page"><i
+			<a href="<%=request.getContextPath() + "/project"%>"
+				class="nav-link active mt-3" aria-current="page"><i
 				class="bi bi-kanban" style="margin: 0 15px 0 30px;"></i> Project </a> <br>
 
 			<!-- nav -->
-			<a href="#" class="nav-link active mt-3" aria-current="page"><i
-				class="bi bi-bank" style="margin: 0 15px 0 30px;"></i> Payment </a>
+			<a href="<%=request.getContextPath() + "/payment"%>"
+				class="nav-link active mt-3" aria-current="page"><i
+				class="bi bi-bank" style="margin: 0 15px 0 30px;"></i> Payment </a><br>
+
+			<!-- nav -->
+			<a href="<%=request.getContextPath() + "/report"%>"
+				class="nav-link active mt-3" aria-current="page"><i
+				class="bi bi-bar-chart-fill" style="margin: 0 20px 0 30px;"></i> Report </a>
+
 		</div>
 		<div class="col-10 offset-2 main-section">
 			<jsp:doBody />

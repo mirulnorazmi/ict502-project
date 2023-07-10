@@ -10,6 +10,8 @@ public class Users {
 	private int roleId;
 	private String password;
 	private String category;
+	private int fulltime;
+	private int parttime;
 	
 //	public Users(int id, String name, String phone, String email, int age, String gender, int roleId, String password) {
 //		super();
@@ -71,6 +73,29 @@ public class Users {
 		this.age = age;
 		this.gender = gender;
 		this.roleId = roleId;
+	}
+	
+	public Users(int fulltime, int parttime) {
+		// TODO Auto-generated constructor stub
+		this.fulltime = fulltime;
+		this.parttime = parttime;
+	}
+	
+
+	public int getFulltime() {
+		return fulltime;
+	}
+
+	public void setFulltime(int fulltime) {
+		this.fulltime = fulltime;
+	}
+
+	public int getParttime() {
+		return parttime;
+	}
+
+	public void setParttime(int parttime) {
+		this.parttime = parttime;
 	}
 
 	public int getId() {

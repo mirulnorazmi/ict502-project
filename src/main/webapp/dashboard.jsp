@@ -29,6 +29,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="t" tagdir="/WEB-INF/tags"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%-- <%@ taglib prefix="chart" uri="http://liferay.com/tld/chart"%>
 <%@ page
 	import="com.liferay.frontend.taglib.chart.model.percentage.donut.DonutChartConfig"%>
@@ -77,7 +78,7 @@ _donutChartConfig.addColumns(new SingleValueColumn("data1", 30), new SingleValue
 							<div
 									class="card-body d-flex flex-row justify-content-between align-items-center">
 								<div>
-									<h5 class="card-title">7</h5>
+									<h5 class="card-title"><c:out value="${listCategory.parttime }" /></h5>
 									<p class="card-text">Part Time</p>
 								</div>
 								<div class="border-icon-status">
@@ -89,7 +90,7 @@ _donutChartConfig.addColumns(new SingleValueColumn("data1", 30), new SingleValue
 							<div
 									class="card-body d-flex flex-row justify-content-between align-items-center">
 								<div>
-									<h5 class="card-title">7</h5>
+									<h5 class="card-title"><c:out value="${listCategory.fulltime }" /></h5>
 									<p class="card-text">Full Time</p>
 								</div>
 								<div class="border-icon-status">
@@ -101,7 +102,7 @@ _donutChartConfig.addColumns(new SingleValueColumn("data1", 30), new SingleValue
 							<div
 									class="card-body d-flex flex-row justify-content-between align-items-center">
 								<div>
-									<h5 class="card-title">12</h5>
+									<h5 class="card-title"><c:out value="${projects.rowCount }" /></h5>
 									<p class="card-text">Total Projects</p>
 								</div>
 								<div class="border-icon-status">
@@ -113,7 +114,7 @@ _donutChartConfig.addColumns(new SingleValueColumn("data1", 30), new SingleValue
 							<div
 									class="card-body d-flex flex-row justify-content-between align-items-center">
 								<div>
-									<h5 class="card-title">12</h5>
+									<h5 class="card-title"><c:out value="${payment.rowCount }" /></h5>
 									<p class="card-text">Total Payment</p>
 								</div>
 								<div class="border-icon-status">
@@ -129,10 +130,20 @@ _donutChartConfig.addColumns(new SingleValueColumn("data1", 30), new SingleValue
 					<div
 							class="d-flex flex-column justify-content-left align-items-top"
 							style="width: 100%">
-						<button type="button" class="btn btn-outline-primary mb-3">
-							Create employees</button>
-						<button type="button" class="btn btn-outline-primary mb-3">
+						<a href="/ICT502-PROJECT/create-employee?emp=fulltime" style="width: 100%;">
+						<button type="button" class="btn btn-outline-primary mb-3" style="width: 100%;">
+						
+							Create employee full time</button>
+							</a>	
+							<a href="/ICT502-PROJECT/create-employee?emp=parttime" style="width: 100%;">
+							<button type="button" class="btn btn-outline-primary mb-3" style="width: 100%;">
+						
+							Create employee part time</button>
+							</a>
+							<a href="/ICT502-PROJECT/createproject">
+						<button type="button" class="btn btn-outline-primary mb-3" style="width: 100%;">
 							Create projects </button>
+							</a>
 					
 					</div>
 				</div>

@@ -5,6 +5,7 @@ public class Projects {
 	private String name;
 	private String department;
 	private double salary;
+	private int rowCount;
 	
 	public Projects(int id,String name, String department, double salary) {
 		this.id = id;
@@ -23,6 +24,16 @@ public class Projects {
 
 	}
 	
+	
+	
+	public int getRowCount() {
+		return rowCount;
+	}
+
+	public void setRowCount(int rowCount) {
+		this.rowCount = rowCount;
+	}
+
 	public int getId() {
 		return id;
 	}

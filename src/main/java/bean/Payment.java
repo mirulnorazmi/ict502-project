@@ -6,6 +6,9 @@ public class Payment {
 	private int id;
 	private double amount;
 	private Date date;
+	private String name;
+	private String projectname;
+	private int rowCount;
 	
 	public Payment(int id, double amount, Date date) {
 		super();
@@ -19,10 +22,43 @@ public class Payment {
 		this.date = date;
 	}
 	
+	public Payment(int id, double amount, Date date, String name, String projectname) {
+		this.id = id;
+		this.amount = amount;
+		this.date = date;
+		this.name = name;
+		this.projectname = projectname;
+	}
+	
 	public Payment() {
 		
 	}
 	
+	
+	public int getRowCount() {
+		return rowCount;
+	}
+
+	public void setRowCount(int rowCount) {
+		this.rowCount = rowCount;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getProjectname() {
+		return projectname;
+	}
+
+	public void setProjectname(String projectname) {
+		this.projectname = projectname;
+	}
+
 	public int getId() {
 		return id;
 	}

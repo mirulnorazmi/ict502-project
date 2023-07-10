@@ -43,14 +43,18 @@ public class EmployeeService {
 	private static final String INSERT_PARTTIME_SQL = "INSERT INTO parttime(empid, startdate, enddate, hourlyrate)"
 			+ "VALUES (?,?,?,?)";
 	private static final String UPDATE_EMPLOYEE_SQL = "UPDATE employee SET empname=?, empphone=?, empemail=?, empage=?, "
-			+ "empgender=?, emproleid=? WHERE empid=?";
+			+ "empgender=? WHERE empid=?";
 	private static final String UPDATE_EMPLOYEE_EMAIL = "UPDATE employee SET empname=?, empphone=?, empage=?, "
-			+ "empgender=?, emproleid=? WHERE empemail=?";
+			+ "empgender=? WHERE empemail=?";
 	private static final String UPDATE_PARTTIME_SQL = "UPDATE parttime SET startdate=?, enddate=?, hourlyrate=? WHERE empid=?";
 	private static final String UPDATE_FULLTIME_SQL = "UPDATE fulltime SET annualleave=?, sickleave=?, insurance=?, unpaidleave=? WHERE empid=?";
 	private static final String DELETE_EMPLOYEE_SQL = "DELETE FROM employee WHERE empid=?";
 	private static final String DELETE_FULLTIME_SQL = "DELETE FROM fulltime WHERE empid=?";
 	private static final String DELETE_PARTTIME_SQL = "DELETE FROM parttime WHERE empid=?";
+	private static final String SELECT_EMPLOYEE_CATEGORY = "SELECT COUNT(f.empid) \"fulltime\" , COUNT(p.empid) \"parttime\" "
+			+ "FROM employee e "
+			+ "FULL JOIN fulltime f ON e.empid = f.empid "
+			+ "FULL JOIN parttime p ON f.empid = p.empid ";
 
 	protected Connection getConnection() {
 		Connection connection = null;
@@ -121,9 +125,9 @@ public class EmployeeService {
 		}
 		return users;
 	}
-	
-	public List<Users> selectAllUsersEmail(){
-		
+
+	public List<Users> selectAllUsersEmail() {
+
 		List<Users> users = new ArrayList<>();
 		try (Connection connection = getConnection();
 
@@ -148,7 +152,34 @@ public class EmployeeService {
 		} catch (SQLException e) {
 			printSQLException(e);
 		}
-		
+
+		return users;
+	}
+	
+	public Users getAllCategories() {
+
+		// using try-with-resources to avoid closing resources (boiler plate code)
+		Users users = new Users();
+		// Step 1: Establishing a Connection
+		try (Connection connection = getConnection();
+
+				// Step 2:Create a statement using connection object
+				PreparedStatement preparedStatement = connection.prepareStatement(SELECT_EMPLOYEE_CATEGORY);) {
+			System.out.println(preparedStatement);
+			// Step 3: Execute the query or update query
+			ResultSet rs = preparedStatement.executeQuery();
+
+			// Step 4: Process the ResultSet object.
+			while (rs.next()) {
+				int id_fulltime = rs.getInt("fulltime");
+				int id_parttime = rs.getInt("parttime");
+
+				users.setFulltime(id_fulltime);
+				users.setParttime(id_parttime);
+			}
+		} catch (SQLException e) {
+			printSQLException(e);
+		}
 		return users;
 	}
 
@@ -158,7 +189,7 @@ public class EmployeeService {
 			try (Connection connection = getConnection();
 					PreparedStatement preparedStatement = connection.prepareStatement(INSERT_EMPLOYEE_SQL,
 							new String[] { "empid" })) {
-				preparedStatement.setString(1, users.getName());
+				preparedStatement.setString(1, users.getName().toUpperCase());
 				preparedStatement.setString(2, users.getPhone());
 				preparedStatement.setString(3, users.getEmail());
 				preparedStatement.setInt(4, users.getAge());
@@ -207,8 +238,6 @@ public class EmployeeService {
 
 		return status;
 	}
-	
-	
 
 	public boolean insertParttime(Parttime parttime) throws SQLException {
 		boolean status = false;
@@ -232,10 +261,10 @@ public class EmployeeService {
 
 		return status;
 	}
-	
+
 	public int getEmployeeByEmail(Users users) {
 		int id = 0;
-		
+
 		try (Connection connection = getConnection();
 				PreparedStatement preparedStatement = connection.prepareStatement(SELECT_ALL_USERS_EMAIL)) {
 			preparedStatement.setString(1, users.getEmail());
@@ -243,7 +272,7 @@ public class EmployeeService {
 			ResultSet rs = preparedStatement.executeQuery();
 
 			while (rs.next()) {
-				 id = rs.getInt("empid");
+				id = rs.getInt("empid");
 
 				System.out.println("employee id : " + id);
 			}
@@ -251,7 +280,7 @@ public class EmployeeService {
 		} catch (SQLException e) {
 			printSQLException(e);
 		}
-		
+
 		return id;
 	}
 
@@ -323,24 +352,29 @@ public class EmployeeService {
 
 	public boolean updateEmployee(Users users) throws SQLException {
 		boolean status = false;
-		if (!checkEmail(users)) {
-			try (Connection connection = getConnection();
-					PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_EMPLOYEE_SQL)) {
-				preparedStatement.setString(1, users.getName());
-				preparedStatement.setString(2, users.getPhone());
-				preparedStatement.setString(3, users.getEmail());
-				preparedStatement.setInt(4, users.getAge());
-				preparedStatement.setString(5, users.getGender());
-				preparedStatement.setInt(6, users.getRoleId());
-				preparedStatement.setInt(7, users.getId());
-				preparedStatement.executeUpdate();
-				status = true;
-				System.out.println(users.getId());
 
-			} catch (SQLException e) {
-				printSQLException(e);
-				status = false;
-			}
+		try (Connection connection = getConnection();
+				PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_EMPLOYEE_SQL)) {
+
+			System.out.println("id" + users.getId());
+			System.out.println("name" + users.getName());
+			System.out.println("Phone" + users.getPhone());
+			System.out.println("Email" + users.getEmail());
+			System.out.println("age" + users.getAge());
+			System.out.println("gender" + users.getGender());
+			preparedStatement.setString(1, users.getName());
+			preparedStatement.setString(2, users.getPhone());
+			preparedStatement.setString(3, users.getEmail());
+			preparedStatement.setInt(4, users.getAge());
+			preparedStatement.setString(5, users.getGender());
+//				preparedStatement.setInt(6, users.getRoleId());
+			preparedStatement.setInt(6, users.getId());
+			preparedStatement.executeUpdate();
+			status = true;
+
+		} catch (SQLException e) {
+			printSQLException(e);
+			status = false;
 		}
 
 		return status;
@@ -354,8 +388,8 @@ public class EmployeeService {
 			preparedStatement.setString(2, users.getPhone());
 			preparedStatement.setInt(3, users.getAge());
 			preparedStatement.setString(4, users.getGender());
-			preparedStatement.setInt(5, users.getRoleId());
-			preparedStatement.setString(6, users.getEmail());
+//			preparedStatement.setInt(5, users.getRoleId());
+			preparedStatement.setString(5, users.getEmail());
 			preparedStatement.executeUpdate();
 			status = true;
 			System.out.println(users.getId());
@@ -374,9 +408,8 @@ public class EmployeeService {
 
 		try (Connection connection = getConnection();
 				PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_PARTTIME_SQL)) {
-			boolean statusEmp = updateEmployeeByEmail(
-					new Users(parttime.getId(), parttime.getName(), parttime.getPhone(), parttime.getEmail(),
-							parttime.getAge(), parttime.getGender(), parttime.getRoleId()));
+			boolean statusEmp = updateEmployeeByEmail(new Users(parttime.getId(), parttime.getName(),
+					parttime.getPhone(), parttime.getEmail(), parttime.getAge(), parttime.getGender()));
 
 			preparedStatement.setDate(1, parttime.getStartdate());
 			preparedStatement.setDate(2, parttime.getEnddate());
@@ -403,7 +436,7 @@ public class EmployeeService {
 		try (Connection connection = getConnection();
 				PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_FULLTIME_SQL)) {
 			boolean statusEmp = updateEmployee(new Users(fulltime.getId(), fulltime.getName(), fulltime.getPhone(),
-					fulltime.getEmail(), fulltime.getAge(), fulltime.getGender(), fulltime.getRoleId()));
+					fulltime.getEmail(), fulltime.getAge(), fulltime.getGender()));
 			preparedStatement.setInt(1, fulltime.getAnnualLeave());
 			preparedStatement.setInt(2, fulltime.getSickLeave());
 			preparedStatement.setString(3, fulltime.getInsurance());
@@ -429,6 +462,8 @@ public class EmployeeService {
 			PreparedStatement statement = connection.prepareStatement(DELETE_EMPLOYEE_SQL);
 			statement.setInt(1, users.getId());
 			rowDeleted = statement.executeUpdate() > 0;
+			System.out.println("Delete employee : " + rowDeleted);
+			System.out.println("id : " + users.getId());
 		}
 		return rowDeleted;
 	}
@@ -437,8 +472,10 @@ public class EmployeeService {
 		boolean rowDeleted;
 		try (Connection connection = getConnection();) {
 			PreparedStatement statement = connection.prepareStatement(DELETE_FULLTIME_SQL);
+			System.out.println("Full time id : " + fulltime.getId());
 			statement.setInt(1, fulltime.getId());
 			rowDeleted = statement.executeUpdate() > 0;
+			System.out.println("Delete employee status : " + rowDeleted);
 			if (rowDeleted) {
 				boolean status = deleteEmployee(fulltime);
 				System.out.println("Delete employee : " + status);

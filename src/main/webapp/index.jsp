@@ -28,11 +28,11 @@
 			    <input name="password" type="password" class="form-control"
 							id="exampleInputPassword1">
 			  </div>
-			  <div class="mb-3 form-check">
+			  <!-- <div class="mb-3 form-check">
 			    <input type="checkbox" class="form-check-input"
 							id="exampleCheck1">
 			    <label class="form-check-label" for="exampleCheck1">Check me out</label>
-			  </div>
+			  </div> -->
 			  <div class="d-flex justify-content-center" style="width: 100%;">
 			  <button type="submit" class="btn btn-primary">Sign in</button>
 			  </div>

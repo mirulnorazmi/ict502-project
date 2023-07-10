@@ -7,11 +7,15 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import service.EmployeeService;
+import service.PaymentService;
+import service.ProjectService;
 
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
 
+import bean.Payment;
+import bean.Projects;
 import bean.Users;
 
 /**
@@ -21,9 +25,13 @@ import bean.Users;
 public class MainServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private EmployeeService employeeService;
+	private ProjectService projectService;
+	private PaymentService paymentService;
 
 	public void init() {
 		employeeService = new EmployeeService();
+		projectService = new ProjectService();
+		paymentService = new PaymentService();
 	}
 
 	/**
@@ -62,7 +70,19 @@ public class MainServlet extends HttpServlet {
 
 	private void showDashboard(HttpServletRequest request, HttpServletResponse response)
 			throws SQLException, IOException, ServletException {
-
+		Users listCategory = employeeService.getAllCategories();
+		Projects projects = new Projects();
+		Payment payment = new Payment();
+		int rowCount = projectService.getTotalProject();
+		projects.setRowCount(rowCount);
+		int rowCountPayment = paymentService.getTotalPayment();
+		payment.setRowCount(rowCountPayment);
+		
+		
+		request.setAttribute("listCategory", listCategory);
+		request.setAttribute("projects", projects);
+		request.setAttribute("payment", payment);
+		
 		RequestDispatcher dispatcher = request.getRequestDispatcher("dashboard.jsp");
 		dispatcher.forward(request, response);
 	}

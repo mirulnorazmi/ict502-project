@@ -37,13 +37,13 @@
 					</div>
                     </div>
                     
-                    <div class="input-group mb-3 mt-3">
+                   <!--  <div class="input-group mb-3 mt-3">
  					 <input type="text" class="form-control"
 					placeholder="Enter Employee Name" aria-label="Recipient's username"
 					aria-describedby="button-addon2">
  						 <button class="btn btn-outline-success" type="button"
 					id="button-addon2">Search</button>
-					</div>
+					</div> -->
 					 
 					
 					<!-- <div class="alert alert-success" role="alert">
@@ -70,7 +70,7 @@
                                 <th>Phone</th>
                                 <th>Email</th>
                                 <th>Age</th>
-                                <th>Gender</th>
+                                <th class="col-1">Gender</th>
                                 <th class="col-2"></th>
                             </tr>
                         </thead>
@@ -134,21 +134,22 @@
                 </div>
      <c:forEach var="user" items="${listUser}">
      <div class="modal fade" id="deleteModal-${user.id}" tabindex="-1">
-	  <div class="modal-dialog">
+	  <div class="modal-dialog modal-dialog-centered">
 	    <div class="modal-content">
 	      <div class="modal-header">
-	        <h5 class="modal-title">Modal title</h5>
+	        <h5 class="modal-title">Delete employee : <b style='color: red !important;'><c:out value="${user.email }" /></b></h5>
 	        <button type="button" class="btn-close" data-bs-dismiss="modal"
 								aria-label="Close"></button>
 	      </div>
 	      <div class="modal-body">
-	        <p>Modal body text goes here.</p>
+	        <p>Are you sure you want to delete this employee? <br> this process
+	        can't be undo</p>
 	      </div>
 	      <div class="modal-footer">
-	        <button type="button" class="btn btn-secondary"
-								data-bs-dismiss="modal">Close</button>
+	        <button type="button" class="btn btn-primary"
+								data-bs-dismiss="modal">cancel</button>
 								<a id="deleteLink" href="/ICT502-PROJECT/DeleteEmployee?id=${user.id }&emp=${user.category}"
-								class="btn btn-primary">Save changes
+								class="btn btn-danger">Yes, Delete this employee
 	        </a>
 	      </div>
 	    </div>

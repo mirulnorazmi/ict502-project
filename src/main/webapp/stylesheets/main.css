@@ -56,3 +56,6 @@ height: calc(100% - 73px);
 height: 100%;
 }
 }
+.report-box{
+	border: 2px solid #f4f4f4;
+}

@@ -1,7 +1,7 @@
 package service;
 
 import java.sql.Connection;
-
+import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -11,6 +11,7 @@ import java.util.List;
 
 import bean.Assigned;
 import bean.Payment;
+import bean.PaymentMonth;
 import bean.Projects;
 import bean.Users;
 
@@ -29,6 +30,17 @@ public class PaymentService {
 	private static final String INSERT_PAYMENT_SQL = "INSERT INTO PAYMENT (amount, paymentdate) VALUES (?,?)";
 	private static final String INSERT_ASSIGNED_SQL = "INSERT INTO assigned (empid, projectid, paymentid, annual, commission) "
 			+ "VALUES (?,?,?,?,?)";
+	private static final String SELECT_ALL_PAYMENT_ASSIGNED = "SELECT p.paymentid, e.empname, pr.projectname , p.amount, p.paymentdate "
+			+ "FROM employee e " + "JOIN assigned a ON e.empid = a.empid "
+			+ "JOIN payment p ON a.paymentid = p.paymentid " + "JOIN project pr ON pr.projectid = a.projectid "
+			+ "ORDER BY p.paymentid";
+	private static final String DELETE_PAYMENT_SQL = "DELETE FROM payment WHERE paymentid=?";
+	private static final String COUNT_PAYMENT_ALL = "SELECT COUNT(*) FROM PAYMENT";
+	private static final String GET_MONTH_PAYMENT = "SELECT TO_CHAR(paymentdate, 'mm') AS month, "
+			+ "COUNT(*) AS data_count " + "FROM payment "
+			+ "WHERE TO_CHAR(paymentdate, 'YYYY') = TO_CHAR(SYSDATE, 'YYYY') " + "GROUP BY TO_CHAR(paymentdate, 'mm') "
+			+ "ORDER BY TO_CHAR(paymentdate, 'mm') ";
+
 	protected Connection getConnection() {
 		Connection connection = null;
 		try {
@@ -59,10 +71,57 @@ public class PaymentService {
 			}
 		}
 	}
-	
+
+	public int getTotalPayment() {
+		int rowCount = 0;
+
+		try (Connection connection = getConnection();
+
+				// Step 2:Create a statement using connection object
+				PreparedStatement preparedStatement = connection.prepareStatement(COUNT_PAYMENT_ALL);) {
+			System.out.println(preparedStatement);
+			// Step 3: Execute the query or update query
+			ResultSet rs = preparedStatement.executeQuery();
+
+			if (rs.next()) {
+				rowCount = rs.getInt(1);
+			}
+
+		} catch (SQLException e) {
+			printSQLException(e);
+		}
+
+		return rowCount;
+	}
+
+	public List<PaymentMonth> getMonthCount() {
+		List<PaymentMonth> paymentMonth = new ArrayList<>();
+
+		try (Connection connection = getConnection();
+
+				// Step 2:Create a statement using connection object
+				PreparedStatement preparedStatement = connection.prepareStatement(GET_MONTH_PAYMENT);) {
+			System.out.println(preparedStatement);
+			// Step 3: Execute the query or update query
+			ResultSet rs = preparedStatement.executeQuery();
+
+			// Step 4: Process the ResultSet object.
+			while (rs.next()) {
+				int month = rs.getInt("MONTH");
+				int count = rs.getInt("DATA_COUNT");
+
+				paymentMonth.add(new PaymentMonth(month, count));
+			}
+		} catch (SQLException e) {
+			printSQLException(e);
+		}
+
+		return paymentMonth;
+	}
+
 	public boolean insertAssigned(Assigned assigned) {
 		boolean status = false;
-		
+
 		try (Connection connection = getConnection();
 				PreparedStatement preparedStatement = connection.prepareStatement(INSERT_ASSIGNED_SQL)) {
 			preparedStatement.setInt(1, assigned.getEmpId());
@@ -71,11 +130,11 @@ public class PaymentService {
 			preparedStatement.setDouble(4, assigned.getAnnual());
 			preparedStatement.setDouble(5, assigned.getCommission());
 			System.out.println(preparedStatement);
-			status = preparedStatement.executeUpdate()>0;
+			status = preparedStatement.executeUpdate() > 0;
 		} catch (SQLException e) {
 			printSQLException(e);
 		}
-		
+
 		return status;
 	}
 
@@ -100,7 +159,44 @@ public class PaymentService {
 		}
 		return id;
 	}
-	
-	
-	
+
+	public List<Payment> selectAllPayment() {
+
+		// using try-with-resources to avoid closing resources (boiler plate code)
+		List<Payment> payment = new ArrayList<>();
+		// Step 1: Establishing a Connection
+		try (Connection connection = getConnection();
+
+				// Step 2:Create a statement using connection object
+				PreparedStatement preparedStatement = connection.prepareStatement(SELECT_ALL_PAYMENT_ASSIGNED);) {
+			System.out.println(preparedStatement);
+			// Step 3: Execute the query or update query
+			ResultSet rs = preparedStatement.executeQuery();
+
+			// Step 4: Process the ResultSet object.
+			while (rs.next()) {
+				int id = rs.getInt("paymentid");
+				String empname = rs.getString("empname");
+				String projectname = rs.getString("projectname");
+				Double amount = rs.getDouble("amount");
+				Date date = rs.getDate("paymentdate");
+
+				payment.add(new Payment(id, amount, date, empname, projectname));
+			}
+		} catch (SQLException e) {
+			printSQLException(e);
+		}
+		return payment;
+	}
+
+	public boolean deletePayment(Payment payment) throws SQLException {
+		boolean rowDeleted;
+		try (Connection connection = getConnection();) {
+			PreparedStatement statement = connection.prepareStatement(DELETE_PAYMENT_SQL);
+			statement.setInt(1, payment.getId());
+			rowDeleted = statement.executeUpdate() > 0;
+		}
+		return rowDeleted;
+	}
+
 }

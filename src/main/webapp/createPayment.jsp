@@ -27,7 +27,7 @@
 			<div class="form-floating"> 
 			<p class="h1 col-10"
 						style="font-size: 20px; padding: 0 0 0 50px; color: #FFFFFF;">
-				By hiring full-time employees, we ensure a dedicated and committed workforce.
+				Unlock the power of seamless transactions with our secure and efficient payment solutions.
 			</p>
 			
 			</div>

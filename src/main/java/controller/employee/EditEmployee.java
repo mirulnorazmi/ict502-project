@@ -129,21 +129,20 @@ public class EditEmployee extends HttpServlet {
 		fulltime.setEmail(request.getParameter("email"));
 		fulltime.setAge(Integer.parseInt(request.getParameter("age")));
 		fulltime.setGender(request.getParameter("gender"));
-		fulltime.setRoleId((int) session.getAttribute("empid"));
+//		fulltime.setRoleId((int) session.getAttribute("empid"));
 		fulltime.setAnnualLeave(Integer.parseInt(request.getParameter("annual")));
 		fulltime.setSickLeave(Integer.parseInt(request.getParameter("sick")));
 		fulltime.setInsurance(request.getParameter("insurance"));
 		fulltime.setUnpaidLeave(Integer.parseInt(request.getParameter("unpaid")));
-
+		
+		System.out.println(fulltime.getGender());
 //		System.out.println("Gender input : " + request.getParameter("gender") );
 //		System.out.println("insurance : " + request.getParameter("insurance"));
 		boolean status = false;
-		if (!employeeService.checkEmail(fulltime)) {
-			status = employeeService.updateFulltime(fulltime);
-			response.sendRedirect(request.getContextPath() + "/employee");
-		} else {
-			response.sendRedirect(request.getContextPath() + "/employee?error=201");
-		}
+
+		status = employeeService.updateFulltime(fulltime);
+		response.sendRedirect(request.getContextPath() + "/employee");
+
 		System.out.println("update fulltime : " + status);
 	}
 
@@ -158,7 +157,7 @@ public class EditEmployee extends HttpServlet {
 		parttime.setEmail(request.getParameter("email"));
 		parttime.setAge(Integer.parseInt(request.getParameter("age")));
 		parttime.setGender(request.getParameter("gender"));
-		parttime.setRoleId((int) session.getAttribute("empid"));
+//		parttime.setRoleId((int) session.getAttribute("empid"));
 		parttime.setStartdate(Date.valueOf(request.getParameter("startDate")));
 		parttime.setEnddate(Date.valueOf(request.getParameter("endDate")));
 		parttime.setHourlyrate(Double.parseDouble(request.getParameter("hourlyRate")));

@@ -76,21 +76,22 @@
      </div>
      <c:forEach var="proj" items="${listProject}">
      <div class="modal fade" id="deleteModal-${proj.id}" tabindex="-1">
-	  <div class="modal-dialog">
+	  <div class="modal-dialog modal-dialog-centered">
 	    <div class="modal-content">
 	      <div class="modal-header">
-	        <h5 class="modal-title">Modal title</h5>
+	        <h5 class="modal-title">Delete project : <b style='color: red !important;'><c:out value="${proj.name }"></c:out></b></h5>
 	        <button type="button" class="btn-close" data-bs-dismiss="modal"
 								aria-label="Close"></button>
-	      </div>
+	      </div> 
 	      <div class="modal-body">
-	        <p>Modal body text goes here.</p>
+	        <p>Are you sure you want to delete this project? <br> this process
+	        can't be undo</p>
 	      </div>
 	      <div class="modal-footer">
 	        <button type="button" class="btn btn-secondary"
 								data-bs-dismiss="modal">Close</button>
 								<a id="deleteLink" href="/ICT502-PROJECT/DeleteProject?id="
-								class="btn btn-primary">Save changes
+								class="btn btn-danger">Yes, delete this project
 	        </a>
 	      </div>
 	    </div>

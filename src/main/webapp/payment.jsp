@@ -23,17 +23,18 @@
 			class="d-flex flex-column justify-content-center align-items-center">
                     <div
 				class="container text-left d-flex flex-row justify-content-between align-items-center">
-						<h4>Project list</h4> 
-                        <a href="createproject" class="btn btn-success">Create Project</a>
+						<h4>Payment list</h4> 
+                        <a href="create-payment" class="btn btn-success">Create Payment</a>
                     </div>
 
                     <table class="table table-hover align-middle mt-4">
                         <thead>
                             <tr>
-                                <th>No</th>
-                                <th>Project Name</th>  
-                                <th>Department</th>
-                                <th>Salary</th>
+                                <th>ID</th>  
+                                <th>Employee name</th>
+                                <th>Project</th>
+                                <th>Amount</th>
+                                <th>Date</th>
                                 <th></th>
                             </tr>
                         </thead>
@@ -41,29 +42,33 @@
 				
 				<tbody>
                             <!--   for (Todo todo: todos) {  -->
-                            <c:forEach var="proj" varStatus="loop"
-						items="${listProject}">
+                            <c:forEach var="payment" varStatus="loop"
+						items="${listPayment}">
 
                                 <tr>
                                     <td>
-                                        <c:out value="${loop.index+1}" />
+                                        <c:out value="${payment.id}" />
                                     </td>
                                     <td>
-                                        <c:out value="${proj.name}" />
+                                        <c:out value="${payment.name}" />
+                                    </td>
+                                    <td>
+                                        <c:out value="${payment.projectname}" />
+                                    </td>
+                                    <td>
+                                        <c:out value="${payment.amount}" />
                                     </td>
                                     <td>
                                         <c:out
-									value="${proj.department}" />
+									value="${payment.date}" />
                                     </td>
                                     <td>
-                                        <c:out value="${proj.salary}" />
-                                    </td>
-                                    <td><a
-								href="edit-project?id=<c:out value='${proj.id}' />"
-								class="btn btn-success"><i class="bi bi-pencil-square"></i> Edit</a> &nbsp;&nbsp;&nbsp;&nbsp; <button
-									onclick="openRelativeModal('${proj.id}')" type="button"
+                                    <%-- <a
+								href="edit-payment?id=<c:out value='${payment.id}' />"
+								class="btn btn-success"><i class="bi bi-pencil-square"></i> Edit</a> --%> &nbsp;&nbsp;&nbsp;&nbsp; <button
+									onclick="openRelativeModal('${payment.id}')" type="button"
 									class="btn btn-danger" data-bs-toggle="modal"
-									data-bs-target="deleteModal-${proj.id}"> 
+									data-bs-target="deleteModal-${payment.id}"> 
   <i class="bi bi-trash"></i> Delete
 </button></td>
                                 </tr> 
@@ -74,23 +79,24 @@
                     </table>
                 </div>
      </div>
-     <c:forEach var="proj" items="${listProject}">
-     <div class="modal fade" id="deleteModal-${proj.id}" tabindex="-1">
-	  <div class="modal-dialog">
+     <c:forEach var="payment" items="${listPayment}">
+     <div class="modal fade" id="deleteModal-${payment.id}" tabindex="-1">
+	  <div class="modal-dialog modal-dialog-centered">
 	    <div class="modal-content">
 	      <div class="modal-header">
-	        <h5 class="modal-title">Modal title</h5>
+	        <h5 class="modal-title">Delete payment : <b style='color: red !important;'><c:out value="${payment.id }" /></b></h5>
 	        <button type="button" class="btn-close" data-bs-dismiss="modal"
 								aria-label="Close"></button>
 	      </div>
 	      <div class="modal-body">
-	        <p>Modal body text goes here.</p>
+	        <p>Are you sure you want to delete this payment? <br> this process
+	        can't be undo</p>
 	      </div>
 	      <div class="modal-footer">
 	        <button type="button" class="btn btn-secondary"
 								data-bs-dismiss="modal">Close</button>
-								<a id="deleteLink" href="/ICT502-PROJECT/DeleteProject?id="
-								class="btn btn-primary">Save changes
+								<a id="deleteLink" href="/ICT502-PROJECT/DeletePayment?id=${payment.id }"
+								class="btn btn-danger">Yes, delete this payment
 	        </a>
 	      </div>
 	    </div>
@@ -103,7 +109,7 @@
 							console.log('id : ' + id);
 
 							$("#deleteLink").attr('href',
-									'/ICT502-PROJECT/DeleteProject?id=' + id);
+									'/ICT502-PROJECT/DeletePayment?id=' + id);
 							$('#deleteModal-' + id).modal('show');
 						}
 					</script>

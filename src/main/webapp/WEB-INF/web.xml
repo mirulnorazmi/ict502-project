@@ -159,4 +159,44 @@
     <servlet-name>CreatePayment</servlet-name>
     <url-pattern>/CreatePayment</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>EditAppointment</display-name>
+    <servlet-name>EditAppointment</servlet-name>
+    <servlet-class>controller.payment.EditAppointment</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>EditAppointment</servlet-name>
+    <url-pattern>/EditAppointment</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>DeletePayment</display-name>
+    <servlet-name>DeletePayment</servlet-name>
+    <servlet-class>controller.payment.DeletePayment</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>DeletePayment</servlet-name>
+    <url-pattern>/DeletePayment</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>EditPayment</display-name>
+    <servlet-name>EditPayment</servlet-name>
+    <servlet-class>controller.payment.EditPayment</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>EditPayment</servlet-name>
+    <url-pattern>/EditPayment</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>ReportServlet</display-name>
+    <servlet-name>ReportServlet</servlet-name>
+    <servlet-class>controller.ReportServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ReportServlet</servlet-name>
+    <url-pattern>/ReportServlet</url-pattern>
+  </servlet-mapping>
 </web-app>
