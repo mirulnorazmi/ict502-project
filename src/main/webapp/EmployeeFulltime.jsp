@@ -80,7 +80,7 @@
 								name="insurance">
 					  <option selected value="Life insurance">Life insurance</option>
 					  <option value="Health insurance">Health insurance</option>
-					  <option value="Life & health insurance">Life & Health insurance</option>
+					  <option value="Life & Health insurance">Life & Health insurance</option>
 					</select>
 				  </div>
 				  <div class="col-6" style="padding: 0 10px 0 0">
