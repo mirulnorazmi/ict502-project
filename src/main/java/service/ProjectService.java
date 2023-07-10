@@ -21,6 +21,7 @@ public class ProjectService {
     private static final String SELECT_ALL_PROJECTS = "select * from project";
     private static final String INSERT_PROJECT_SQL = "insert into project (projectname, projectdept, projectsalary) VALUES (?, ?, ?)";
     private static final String SELECT_PROJECT_ID = "SELECT * FROM project WHERE projectid=?";
+    private static final String SELECT_PROJECT_NAME = "SELECT * FROM project WHERE projectname=?";
     private static final String DELETE_PROJECT_SQL = "DELETE from project where projectid = ?";
     private static final String UPDATE_PROJECT = "UPDATE project set projectname=?, projectdept=?, projectsalary=? WHERE projectid=?";
 	protected Connection getConnection() {
@@ -106,6 +107,26 @@ public class ProjectService {
 		}
 
 		return proj;
+	}
+	
+	public int getProjectByName(Projects projects) {
+		int id = 0;
+
+		try (Connection connection = getConnection();
+				PreparedStatement preparedStatement = connection.prepareStatement(SELECT_PROJECT_NAME)) {
+			preparedStatement.setString(1, projects.getName());
+
+			ResultSet rs = preparedStatement.executeQuery();
+
+			while (rs.next()) {
+				id = rs.getInt("projectid");
+			}
+
+		} catch (SQLException e) {
+			printSQLException(e);
+		}
+
+		return id;
 	}
 	
 	public boolean updateProject(Projects project) throws SQLException {

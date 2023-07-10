@@ -164,12 +164,10 @@ public class EditEmployee extends HttpServlet {
 		parttime.setHourlyrate(Double.parseDouble(request.getParameter("hourlyRate")));
 
 		boolean status = false;
-		if (!employeeService.checkEmail(parttime)) {
-			status = employeeService.updateParttime(parttime);	
-			response.sendRedirect(request.getContextPath() + "/employee");
-		} else {
-			response.sendRedirect(request.getContextPath() + "/employee?error=202");
-		}
+
+		status = employeeService.updateParttime(parttime);
+		response.sendRedirect(request.getContextPath() + "/employee");
+
 		System.out.println("update parttime : " + status);
 	}
 

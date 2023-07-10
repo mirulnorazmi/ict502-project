@@ -37,8 +37,8 @@
 			  </div>
 			  <div class="p-2 g-col-6">
 				 <label for="exampleFormControlInput1" class="form-label">Email</label>
-				 <input name="email" type="email" class="form-control"
-							id="exampleFormControlInput1" value="<c:out value='${employee.email }' />">
+				 <input name="email" type="email" class="form-control bg-light"
+							id="exampleFormControlInput1" value="<c:out value='${employee.email }' />" readonly>
 			  </div> 
 			  <div class="p-2 g-col-6">
 				 <label for="exampleFormControlInput1" class="form-label">Phone Number</label>

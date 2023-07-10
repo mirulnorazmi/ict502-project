@@ -21,6 +21,7 @@ public class EmployeeService {
 	private String jdbcPassword = "system";
 
 	private static final String SELECT_ALL_USERS = "select * from employee order by empid";
+	private static final String SELECT_ALL_USERS_EMAIL = "select * from employee WHERE empemail=?";
 //    private static final String SELECT_EMPLOYEE_ID = "SELECT e.empid,f.empid \"fulltime_id\", p.empid \"parrtime_id\", empname, empphone, empemail, empage, empgender, emproleid, annualleave, sickleave, insurance, unpaidleave, hourlyrate, startdate, enddate "
 //    		+ "FROM employee e "
 //    		+ "LEFT OUTER JOIN fulltime f "
@@ -43,6 +44,8 @@ public class EmployeeService {
 			+ "VALUES (?,?,?,?)";
 	private static final String UPDATE_EMPLOYEE_SQL = "UPDATE employee SET empname=?, empphone=?, empemail=?, empage=?, "
 			+ "empgender=?, emproleid=? WHERE empid=?";
+	private static final String UPDATE_EMPLOYEE_EMAIL = "UPDATE employee SET empname=?, empphone=?, empage=?, "
+			+ "empgender=?, emproleid=? WHERE empemail=?";
 	private static final String UPDATE_PARTTIME_SQL = "UPDATE parttime SET startdate=?, enddate=?, hourlyrate=? WHERE empid=?";
 	private static final String UPDATE_FULLTIME_SQL = "UPDATE fulltime SET annualleave=?, sickleave=?, insurance=?, unpaidleave=? WHERE empid=?";
 	private static final String DELETE_EMPLOYEE_SQL = "DELETE FROM employee WHERE empid=?";
@@ -118,6 +121,36 @@ public class EmployeeService {
 		}
 		return users;
 	}
+	
+	public List<Users> selectAllUsersEmail(){
+		
+		List<Users> users = new ArrayList<>();
+		try (Connection connection = getConnection();
+
+				// Step 2:Create a statement using connection object
+				PreparedStatement preparedStatement = connection.prepareStatement(SELECT_ALL_USERS);) {
+			System.out.println(preparedStatement);
+			// Step 3: Execute the query or update query
+			ResultSet rs = preparedStatement.executeQuery();
+
+			// Step 4: Process the ResultSet object.
+			while (rs.next()) {
+				int id = rs.getInt("empid");
+				String name = rs.getString("empname");
+				String phone = rs.getString("empphone");
+				String email = rs.getString("empemail");
+				int age = rs.getInt("empage");
+				String gender = rs.getString("empgender");
+				int roleId = rs.getInt("emproleid");
+
+				users.add(new Users(id, name, phone, email, age, gender, roleId));
+			}
+		} catch (SQLException e) {
+			printSQLException(e);
+		}
+		
+		return users;
+	}
 
 	public int insertEmployee(Users users) {
 		int id = 0;
@@ -174,6 +207,8 @@ public class EmployeeService {
 
 		return status;
 	}
+	
+	
 
 	public boolean insertParttime(Parttime parttime) throws SQLException {
 		boolean status = false;
@@ -196,6 +231,28 @@ public class EmployeeService {
 		}
 
 		return status;
+	}
+	
+	public int getEmployeeByEmail(Users users) {
+		int id = 0;
+		
+		try (Connection connection = getConnection();
+				PreparedStatement preparedStatement = connection.prepareStatement(SELECT_ALL_USERS_EMAIL)) {
+			preparedStatement.setString(1, users.getEmail());
+
+			ResultSet rs = preparedStatement.executeQuery();
+
+			while (rs.next()) {
+				 id = rs.getInt("empid");
+
+				System.out.println("employee id : " + id);
+			}
+
+		} catch (SQLException e) {
+			printSQLException(e);
+		}
+		
+		return id;
 	}
 
 	public Fulltime getOneFulltime(Users usr) {
@@ -289,13 +346,37 @@ public class EmployeeService {
 		return status;
 	}
 
+	public boolean updateEmployeeByEmail(Users users) throws SQLException {
+		boolean status = false;
+		try (Connection connection = getConnection();
+				PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_EMPLOYEE_EMAIL)) {
+			preparedStatement.setString(1, users.getName());
+			preparedStatement.setString(2, users.getPhone());
+			preparedStatement.setInt(3, users.getAge());
+			preparedStatement.setString(4, users.getGender());
+			preparedStatement.setInt(5, users.getRoleId());
+			preparedStatement.setString(6, users.getEmail());
+			preparedStatement.executeUpdate();
+			status = true;
+			System.out.println(users.getId());
+			System.out.println("Email form : " + users.getEmail());
+
+		} catch (SQLException e) {
+			printSQLException(e);
+			status = false;
+		}
+
+		return status;
+	}
+
 	public boolean updateParttime(Parttime parttime) throws SQLException {
 		boolean status = false;
 
 		try (Connection connection = getConnection();
 				PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_PARTTIME_SQL)) {
-			boolean statusEmp = updateEmployee(new Users(parttime.getId(), parttime.getName(), parttime.getPhone(),
-					parttime.getEmail(), parttime.getAge(), parttime.getGender(), parttime.getRoleId()));
+			boolean statusEmp = updateEmployeeByEmail(
+					new Users(parttime.getId(), parttime.getName(), parttime.getPhone(), parttime.getEmail(),
+							parttime.getAge(), parttime.getGender(), parttime.getRoleId()));
 
 			preparedStatement.setDate(1, parttime.getStartdate());
 			preparedStatement.setDate(2, parttime.getEnddate());

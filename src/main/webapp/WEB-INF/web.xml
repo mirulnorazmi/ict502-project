@@ -139,4 +139,24 @@
     <servlet-name>DeleteEmployee</servlet-name>
     <url-pattern>/DeleteEmployee</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>PaymentServlet</display-name>
+    <servlet-name>PaymentServlet</servlet-name>
+    <servlet-class>controller.payment.PaymentServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>PaymentServlet</servlet-name>
+    <url-pattern>/PaymentServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>CreatePayment</display-name>
+    <servlet-name>CreatePayment</servlet-name>
+    <servlet-class>controller.payment.CreatePayment</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>CreatePayment</servlet-name>
+    <url-pattern>/CreatePayment</url-pattern>
+  </servlet-mapping>
 </web-app>
