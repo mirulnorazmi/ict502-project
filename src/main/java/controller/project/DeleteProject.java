@@ -2,7 +2,6 @@ package controller.project;
 
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
-
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
@@ -15,22 +14,21 @@ import java.sql.SQLException;
 import bean.Projects;
 
 /**
- * Servlet implementation class UpdateProject
+ * Servlet implementation class DeleteProject
  */
-@WebServlet("/edit-project")
-public class UpdateProject extends HttpServlet {
+public class DeleteProject extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private ProjectService projectService;
-    
-	
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
+
 	public void init() {
 		projectService = new ProjectService();
 	}
-	
-    public UpdateProject() {
+
+       
+    /**
+     * @see HttpServlet#HttpServlet()
+     */
+    public DeleteProject() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -41,14 +39,16 @@ public class UpdateProject extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 //		response.getWriter().append("Served at: ").append(request.getContextPath());
-		int id = Integer.parseInt(request.getParameter("id"));
-		System.out.println("id : "+id);
-		Projects project = new Projects();
-		project.setId(id);
-		project = projectService.getOneProject(project);
-		request.setAttribute("project", project);
-		RequestDispatcher dispatcher = request.getRequestDispatcher("editProject.jsp");
-		dispatcher.forward(request, response);
+		Projects projects = new Projects();
+		try {
+			projects.setId(Integer.parseInt(request.getParameter("id")));
+			boolean status = projectService.deleteProject(projects);
+			System.out.println("Status delete : " + status);
+			response.sendRedirect(request.getContextPath() + "/project");
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	/**
@@ -57,24 +57,6 @@ public class UpdateProject extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 //		doGet(request, response);
-		Projects project = new Projects();
-		int id = Integer.parseInt(request.getParameter("id"));
-		String name = request.getParameter("name");
-		String dept = request.getParameter("department");
-		Double salary = Double.parseDouble(request.getParameter("salary")); 
-		project.setId(id);
-		project.setName(name);
-		project.setDepartment(dept);
-		project.setSalary(salary);
-		try {
-			boolean status = projectService.updateProject(project);
-			response.sendRedirect(request.getContextPath() +"/project");
-			System.out.println("update status ; " + status);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
 	}
 
 }

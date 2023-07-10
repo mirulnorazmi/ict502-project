@@ -34,43 +34,43 @@
 							alt="Sample image" width=800px height=800px>
       </div>
       <div class="col-md-8 col-lg-6 col-xl-6">
-        <form action="CreateProject" method="post">
+        <form action="<c:out value='${pageContext.servletContext.contextPath}' />/edit-project" method="post">
           <!-- Email input -->
           <div class="form-outline mb-4">
           <label class="form-label" for="form3Example3">Project Name</label>
             <input name="name" type="text" id="form3Example3"
-									class="form-control form-control"
-									placeholder="Enter project name " />
+									class="form-control form-control" value="${project.name}" />
+          	<input name="id" value="${project.id }" hidden />
           </div>
 
           <!-- Password input -->
           <div class="form-outline mb-3">
           <label class="form-label" for="form3Example4">Department</label>
             <input name="department" type="text" id="form3Example4"
-									class="form-control form-control"
-									placeholder="Enter department" />
+									class="form-control form-control" value="${project.department}" />
           </div>
           
           <div class="form-outline mb-3">
           <label class="form-label" for="form3Example5">Salary</label>
             <input name="salary" type="number" id="form3Example5"
-									class="form-control form-control" placeholder="Enter Salary" />  
+									class="form-control form-control" value="${project.salary}" />  
           </div>
 
           <div class="d-flex justify-content-between align-items-center"> 
           </div>
 
-          <div class="d-flex flex-row justify-content-between text-center text-lg-start mt-4 pt-2">
+          <div
+								class="d-flex flex-row justify-content-between text-center text-lg-start mt-4 pt-2">
           <a
 									href="<c:out value="${pageContext.servletContext.contextPath}" />/project">
           <button type="button" class="btn btn-danger btn"
 										style="padding-left: 2.5rem; padding-right: 2.5rem;">cancel</button>
-										</a>
+									</a>
           <div>
          <!--  <button type="reset" class="btn btn-danger btn"
 										style="padding-left: 2.5rem; padding-right: 2.5rem;">Reset</button> --> 
             <button type="submit" class="btn btn-primary btn"
-										style="padding-left: 2.5rem; padding-right: 2.5rem;">Create</button>
+										style="padding-left: 2.5rem; padding-right: 2.5rem;">Save</button>
 			</div>
           </div>  
         </form>

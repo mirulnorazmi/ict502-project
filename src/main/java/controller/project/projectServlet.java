@@ -43,7 +43,6 @@ public class projectServlet extends HttpServlet {
 		request.setAttribute("listProject", listProject);
 		RequestDispatcher dispatcher = request.getRequestDispatcher("project.jsp");
 		dispatcher.forward(request, response);
-		
 	}
 
 	/**

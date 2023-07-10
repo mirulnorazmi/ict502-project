@@ -2,6 +2,7 @@ package service;
 
 import java.sql.Connection;
 
+
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -20,7 +21,8 @@ public class ProjectService {
     private static final String SELECT_ALL_PROJECTS = "select * from project";
     private static final String INSERT_PROJECT_SQL = "insert into project (projectname, projectdept, projectsalary) VALUES (?, ?, ?)";
     private static final String SELECT_PROJECT_ID = "SELECT * FROM project WHERE projectid=?";
-    
+    private static final String DELETE_PROJECT_SQL = "DELETE from project where projectid = ?";
+    private static final String UPDATE_PROJECT = "UPDATE project set projectname=?, projectdept=?, projectsalary=? WHERE projectid=?";
 	protected Connection getConnection() {
         Connection connection = null;
         try {
@@ -71,7 +73,7 @@ public class ProjectService {
         try (Connection connection = getConnection(); PreparedStatement preparedStatement = connection.prepareStatement(INSERT_PROJECT_SQL)) {
             preparedStatement.setString(1, project.getName());
             preparedStatement.setString(2, project.getDepartment());
-            preparedStatement.setInt(3, project.getSalary());
+            preparedStatement.setDouble(3, project.getSalary());
             System.out.println(preparedStatement);
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
@@ -93,7 +95,7 @@ public class ProjectService {
 				int project_id = rs.getInt("projectid");
 				String name = rs.getString("projectname");
 				String dept = rs.getString("projectdept");
-				int salary = rs.getInt("projectsalary");
+				double salary = rs.getDouble("projectsalary");
 
 
 				proj = new Projects(project_id, name, dept, salary);
@@ -104,6 +106,36 @@ public class ProjectService {
 		}
 
 		return proj;
+	}
+	
+	public boolean updateProject(Projects project) throws SQLException {
+		boolean status = false;
+
+		try (Connection connection = getConnection();
+				PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_PROJECT)) {
+			preparedStatement.setString(1, project.getName());
+			preparedStatement.setString(2, project.getDepartment());
+			preparedStatement.setDouble(3, project.getSalary());
+			preparedStatement.setInt(4, project.getId());
+			System.out.println(project.getName());
+			preparedStatement.executeUpdate();
+			status = true;
+		} catch (SQLException e) {
+			printSQLException(e);
+			status = false;
+		}
+
+		return status;
+	}
+	
+	public boolean deleteProject(Projects projects) throws SQLException {
+		boolean rowDeleted;
+		try (Connection connection = getConnection();) {
+			PreparedStatement statement = connection.prepareStatement(DELETE_PROJECT_SQL);
+			statement.setInt(1, projects.getId());
+			rowDeleted = statement.executeUpdate() > 0;
+		}
+		return rowDeleted;
 	}
 	
 	private void printSQLException(SQLException ex) {

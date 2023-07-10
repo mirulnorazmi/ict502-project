@@ -58,7 +58,7 @@ public class CreateProject extends HttpServlet {
 
 		String name = request.getParameter("name");
 		String department = request.getParameter("department");
-		int salary = Integer.parseInt(request.getParameter("salary"));
+		double salary = Double.parseDouble(request.getParameter("salary"));
 		System.out.println(salary);
 		Projects project = new Projects(name, department, salary);
 

@@ -7,12 +7,23 @@ public class Users {
 	private String email;
 	private int age;
 	private String gender;
-	private String password;
 	private int roleId;
+	private String password;
+	private String category;
 	
+//	public Users(int id, String name, String phone, String email, int age, String gender, int roleId, String password) {
+//		super();
+//		this.id = id;
+//		this.name = name;
+//		this.phone = phone;
+//		this.email = email;
+//		this.age = age;
+//		this.gender = gender;
+//		this.roleId = roleId;
+//		this.password = password;
+//	}
 	
-	
-	public Users(int id, String name, String phone, String email, int age, String gender, String password, int roleId) {
+	public Users(int id, String name, String phone, String email, int age, String gender, int roleId) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -20,12 +31,46 @@ public class Users {
 		this.email = email;
 		this.age = age;
 		this.gender = gender;
-		this.password = password;
 		this.roleId = roleId;
 	}
 	
+	public Users(int id, String name, String phone, String email, int age, String gender, int roleId, String category) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.phone = phone;
+		this.email = email;
+		this.age = age;
+		this.gender = gender;
+		this.roleId = roleId;
+		this.category = category;
+	}
+
+	
+	public Users(int id, String name, String phone, String email, int age, String gender) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.phone = phone;
+		this.email = email;
+		this.age = age;
+		this.gender = gender;
+	}
+	
+	
 	public Users() {
 		// TODO Auto-generated constructor stub
+	}
+
+
+	public Users(String name, String phone, String email, int age, String gender, int roleId) {
+		// TODO Auto-generated constructor stub
+		this.name = name;
+		this.phone = phone;
+		this.email = email;
+		this.age = age;
+		this.gender = gender;
+		this.roleId = roleId;
 	}
 
 	public int getId() {
@@ -64,17 +109,23 @@ public class Users {
 	public void setGender(String gender) {
 		this.gender = gender;
 	}
+	public int getRoleId() {
+		return roleId;
+	}
+	public void setRoleId(int roleId) {
+		this.roleId = roleId;
+	}
 	public String getPassword() {
 		return password;
 	}
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	public int getRoleId() {
-		return roleId;
+	public String getCategory() {
+		return category;
 	}
-	public void setRoleId(int roleId) {
-		this.roleId = roleId;
+	public void setCategory(String category) {
+		this.category = category;
 	}
 	
 	

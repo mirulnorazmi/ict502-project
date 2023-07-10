@@ -4,16 +4,16 @@ public class Projects {
 	private int id;
 	private String name;
 	private String department;
-	private int salary;
+	private double salary;
 	
-	public Projects(int id,String name, String department, int salary) {
+	public Projects(int id,String name, String department, double salary) {
 		this.id = id;
 		this.name = name;
 		this.department = department;
 		this.salary = salary;
 	}
 	
-	public Projects(String name, String department, int salary) {
+	public Projects(String name, String department, double salary) {
 		this.name = name;
 		this.department = department;
 		this.salary = salary;
@@ -41,10 +41,10 @@ public class Projects {
 	public void setDepartment(String department) {
 		this.department = department;
 	}
-	public int getSalary() {
+	public double getSalary() {
 		return salary;
 	}
-	public void setSalary(int salary) {
+	public void setSalary(double salary) {
 		this.salary = salary;
 	}
 	

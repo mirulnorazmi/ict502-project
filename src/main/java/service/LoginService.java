@@ -80,9 +80,7 @@ public class LoginService {
 		return status;
 	}
 
-	public String getNameDb(String email) throws SQLException {
-		String name = "";
-
+	public Users getInformation(String email) throws SQLException {
 //		Class.forName("oracle.jdbc.driver.OracleDriver");
 		Users users = new Users();
 		try (Connection connection = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe", "dbpms",
@@ -96,16 +94,18 @@ public class LoginService {
 			ResultSet rs = preparedStatement.executeQuery();
 
 			while (rs.next()) {
-				name = rs.getString("EMPNAME");
+				users.setName(rs.getString("empname")); 
+				users.setId(rs.getInt("empid"));
 			}
-			System.out.println(name);
+			System.out.println(users.getName());
+			System.out.println(users.getId());
 //			System.out.println(status);
 
 		} catch (SQLException e) {
 			// process sql exception
 			printSQLException(e);
 		}
-		return name;
+		return users;
 	}
 
 	private void printSQLException(SQLException ex) {

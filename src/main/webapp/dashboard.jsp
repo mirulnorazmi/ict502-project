@@ -66,7 +66,6 @@ _donutChartConfig.addColumns(new SingleValueColumn("data1", 30), new SingleValue
 						
 						</div>
 						
-						
 					
 				</div>
 				<br>
@@ -142,5 +141,6 @@ _donutChartConfig.addColumns(new SingleValueColumn("data1", 30), new SingleValue
 
 			
      </div>
+     
     </jsp:body>
 </t:dashboard>

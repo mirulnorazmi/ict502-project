@@ -62,7 +62,10 @@ public class SigninServlet extends HttpServlet {
 			if (loginservice.validate(user)) {
 				HttpSession session = request.getSession();
 				session.setAttribute("email", email);
-				session.setAttribute("name", loginservice.getNameDb(email));
+				user = loginservice.getInformation(email);
+				session.setAttribute("name", user.getName());
+				session.setAttribute("empid", user.getId());
+				System.out.println("session id" + session.getAttribute("empid"));
 //				response.sendRedirect("dashboard.jsp");
 //				request.getRequestDispatcher("/dashboard.jsp").forward(request, response);
 				response.sendRedirect(request.getContextPath() + "/dashboard");

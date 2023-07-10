@@ -99,4 +99,44 @@
     <servlet-name>UpdateProject</servlet-name>
     <url-pattern>/UpdateProject</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>DeleteProject</display-name>
+    <servlet-name>DeleteProject</servlet-name>
+    <servlet-class>controller.project.DeleteProject</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>DeleteProject</servlet-name>
+    <url-pattern>/DeleteProject</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>EditEmployee</display-name>
+    <servlet-name>EditEmployee</servlet-name>
+    <servlet-class>controller.employee.EditEmployee</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>EditEmployee</servlet-name>
+    <url-pattern>/EditEmployee</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>UpdateEmployee</display-name>
+    <servlet-name>UpdateEmployee</servlet-name>
+    <servlet-class>controller.employee.UpdateEmployee</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>UpdateEmployee</servlet-name>
+    <url-pattern>/UpdateEmployee</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>DeleteEmployee</display-name>
+    <servlet-name>DeleteEmployee</servlet-name>
+    <servlet-class>controller.employee.DeleteEmployee</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>DeleteEmployee</servlet-name>
+    <url-pattern>/DeleteEmployee</url-pattern>
+  </servlet-mapping>
 </web-app>
