@@ -108,7 +108,7 @@
 			  </div>
 			  <div class="p-2 g-col-6 d-flex justify-content-end"> 
 			  	<button type="reset" class="btn btn-outline-danger" style="margin-right: 10px;">Reset</button>
-			  	<button type="submit" class="btn btn-outline-primary">Create</button>
+			  	<button type="submit" class="btn btn-outline-primary">Update</button>
 			  </div> 
 			  
 			</div>

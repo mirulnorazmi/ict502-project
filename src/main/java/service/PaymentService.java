@@ -36,9 +36,12 @@ public class PaymentService {
 			+ "ORDER BY p.paymentid";
 	private static final String DELETE_PAYMENT_SQL = "DELETE FROM payment WHERE paymentid=?";
 	private static final String COUNT_PAYMENT_ALL = "SELECT COUNT(*) FROM PAYMENT";
-	private static final String GET_MONTH_PAYMENT = "SELECT TO_CHAR(paymentdate, 'mm') AS month, "
-			+ "COUNT(*) AS data_count " + "FROM payment "
-			+ "WHERE TO_CHAR(paymentdate, 'YYYY') = TO_CHAR(SYSDATE, 'YYYY') " + "GROUP BY TO_CHAR(paymentdate, 'mm') "
+	private static final String GET_MONTH_PAYMENT = "SELECT TO_CHAR(p.paymentdate, 'mm') AS month, "
+			+ "COUNT(*) AS data_count "
+			+ "FROM payment p "
+			+ "JOIN assigned a ON p.paymentid = a.paymentid "
+			+ "WHERE TO_CHAR(paymentdate, 'YYYY') = TO_CHAR(SYSDATE, 'YYYY') "
+			+ "GROUP BY TO_CHAR(paymentdate, 'mm') "
 			+ "ORDER BY TO_CHAR(paymentdate, 'mm') ";
 
 	protected Connection getConnection() {
